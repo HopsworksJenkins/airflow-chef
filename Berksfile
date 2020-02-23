@@ -20,10 +20,10 @@ cookbook 'apt', '~> 7.0'
 cookbook 'poise-python', '~> 1.7'
 
 cookbook 'java'
-cookbook 'kagent', github: "logicalclocks/kagent-chef", branch: "master"
-cookbook 'hops', github: "logicalclocks/hops-hadoop-chef", branch: "master"
-cookbook 'ndb', github: "logicalclocks/ndb-chef", branch: "master"
-cookbook 'conda', github: "logicalclocks/conda-chef", branch: "master"
+cookbook 'kagent', github: "hopsworksjenkins/kagent-chef", branch: "330"
+cookbook 'hops', github: "hopsworksjenkins/hops-hadoop-chef", branch: "330"
+cookbook 'ndb', github: "hopsworksjenkins/ndb-chef", branch: "330"
+cookbook 'conda', github: "hopsworksjenkins/conda-chef", branch: "330"
 
-cookbook 'hive2', github: "logicalclocks/hive-chef", branch: "master"
+cookbook 'hive2', github: "hopsworksjenkins/hive-chef", branch: "330"
 
