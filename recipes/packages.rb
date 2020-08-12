@@ -32,25 +32,6 @@ node['airflow']['dependencies'][platform][:default].each do |dependency|
   dependencies_to_install << dependency
 end
 
-# Get Airflow packages as strings
-airflow_packages = []
-node['airflow']['packages'].each do |key, _value|
-  airflow_packages << key.to_s
-end
-
-# Use the airflow package strings to add dependent packages to install.
-airflow_packages.each do |package|
-  if node['airflow']['dependencies'][platform].key?(package.to_sym)
-    node['airflow']['dependencies'][platform][package].each do |dependency|
-      dependencies_to_install << dependency
-    end
-  end
-end
-
-if(airflow_packages.include?('all') || airflow_packages.include?('oracle'))
-  raise ArgumentError, "Sorry, currently all, devel and oracle airflow pip packages are not supported in this cookbook. For more info, please see the README.md file."
-end
-
 # Install dependencies
 dependencies_to_install.each do |value|
   package_to_install = ''
@@ -118,35 +99,8 @@ for operator in node['airflow']['operators'].split(",")
                   'AIRFLOW_HOME' => node['airflow']['base_dir']})
     code <<-EOF
       set -e
-      #{node['conda']['base_dir']}/envs/airflow/bin/pip install --no-cache-dir apache-airflow["#{operator}"]==#{node['airflow']['version']}
+      #{node['conda']['base_dir']}/envs/airflow/bin/pip install apache-airflow["#{operator}"]==#{node['airflow']['version']} --constraint #{node['airflow']['url']}
     EOF
   end
 end
 
-# Install Airflow packages
-node['airflow']['packages'].each do |_key, value|
-  value.each do |val|
-    package_to_install = ''
-    version_to_install = ''
-    val.each do |k, v|
-      if k.to_s == 'name'
-        package_to_install = v
-      else
-        version_to_install = v
-      end
-    end
-    bash 'install_python__' + package_to_install do
-      umask "022"
-      user node['conda']['user']
-      group node['conda']['group']
-      code <<-EOF
-        set -e
-        #{node['conda']['base_dir']}/envs/airflow/bin/pip install --no-cache-dir \'#{package_to_install}#{version_to_install}\'
-      EOF
-    end
-    #python_package package_to_install.to_s do
-    #  action :install
-    #  version version_to_install.to_s
-    #end
-  end
-end
