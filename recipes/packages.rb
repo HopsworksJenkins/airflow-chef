@@ -26,6 +26,33 @@ if platform == 'rhel' and node['rhel']['epel'].downcase == "true"
   node.default['airflow']['dependencies'][platform][:default] << epel_release
 end
 
+if platform == 'rhel' 
+  ## Add maria db repo for new version 
+  bash "add_mariadb_repo" do
+    user 'root'
+    group 'root'
+    code <<-EOF
+tee -a /etc/yum.repos.d/mariadb.repo << EOM
+# MariaDB 10.1 CentOS repository list - created 2020-10-07 14:28 UTC
+# http://downloads.mariadb.org/mariadb/repositories/
+[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/10.1/centos7-amd64
+gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+EOM
+    EOF
+  end
+end
+
+if node['platform_family'].eql?("rhel") && node['rhel']['epel'].downcase == "true"
+  package "epel-release"
+end
+
+if node['platform_family'].eql?("rhel")
+  package "openssl11"
+end
+
 # Default dependencies to install
 dependencies_to_install = []
 node['airflow']['dependencies'][platform][:default].each do |dependency|
