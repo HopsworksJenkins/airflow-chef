@@ -21,7 +21,7 @@ default['airflow']['dependencies'] =
                 { name: 'autoconf', version: '' },
                 { name: 'automake', version: '' },
                 { name: 'pkg-config', version: '' },
-                { name: 'libtool', version: '' }],
+                { name: 'libtool', version: '' },
                 { name: 'mysql-client', version: '' },
                 { name: 'libmysqlclient-dev', version: '' },
                 { name: 'postgresql-client', version: '' },
