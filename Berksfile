@@ -16,9 +16,9 @@ source "https://supermarket.chef.io"
 
 metadata
 
-cookbook 'kagent', github: "logicalclocks/kagent-chef", branch: "master"
-cookbook 'hops', github: "logicalclocks/hops-hadoop-chef", branch: "master"
-cookbook 'ndb', github: "logicalclocks/ndb-chef", branch: "master"
-cookbook 'conda', github: "logicalclocks/conda-chef", branch: "master"
-cookbook 'hive2', github: "logicalclocks/hive-chef", branch: "master"
-cookbook 'consul', github: "logicalclocks/consul-chef", branch: "master"
+cookbook 'kagent', github: "hopsworksjenkins/kagent-chef", branch: "1120-ee"
+cookbook 'hops', github: "hopsworksjenkins/hops-hadoop-chef", branch: "1120-ee"
+cookbook 'ndb', github: "hopsworksjenkins/ndb-chef", branch: "1120-ee"
+cookbook 'conda', github: "hopsworksjenkins/conda-chef", branch: "1120-ee"
+cookbook 'hive2', github: "hopsworksjenkins/hive-chef", branch: "1120-ee"
+cookbook 'consul', github: "hopsworksjenkins/consul-chef", branch: "1120-ee"
