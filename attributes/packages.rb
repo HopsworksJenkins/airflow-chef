@@ -44,6 +44,7 @@ default['airflow']['dependencies'] =
                 { name: 'zlib-devel', version: '' },
                 { name: 'python-devel', version: '' },
                 { name: 'mariadb', version: '' },
+                { name: 'openssl11', version: '' },
                 { name: 'mariadb-devel', version: '' },
                 { name: 'postgresql', version: '' },
                 { name: 'postgresql-devel', version: '' },

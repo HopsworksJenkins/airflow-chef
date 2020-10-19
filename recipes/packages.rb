@@ -26,6 +26,7 @@ if platform == 'rhel' and node['rhel']['epel'].downcase == "true"
   node.default['airflow']['dependencies'][platform][:default] << epel_release
 end
 
+#For maria DB 10
 if platform == 'rhel' 
   ## Add maria db repo for new version 
   bash "add_mariadb_repo" do
@@ -45,12 +46,9 @@ EOM
   end
 end
 
+# epel for openssl11
 if node['platform_family'].eql?("rhel") && node['rhel']['epel'].downcase == "true"
   package "epel-release"
-end
-
-if node['platform_family'].eql?("rhel")
-  package "openssl11"
 end
 
 # Default dependencies to install
